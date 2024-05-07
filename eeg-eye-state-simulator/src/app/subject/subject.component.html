@@ -1,21 +1,34 @@
 <h2>Subject selection</h2>
 
-<label for="subjectSelect">Select a loaded subject from the list      </label>
 
-<select id="subjectSelect">
-    <option value="" disabled selected>{{ defaultText }}</option>
+<div id="selection" style="display:inline-block; width: 40%">
+<h3>Select a loaded subject from the list</h3>
+<select id="subjectSelect"  (change)="onSubjectSelected($event)">
+    <option value="" disabled selected>{{ subjectDefaultText }}</option>
     <option *ngFor="let subject of subject_list" [value]="subject">{{ subject }}</option>
 </select>
+</div>
 
 
-<input type="file" class="file-input"
-       (change)="onFileSelected($event)" #fileUpload>
+<input type="file" class="file-input" (change)="onFileSelected($event)" [accept]=requiredFileType #fileUpload>
 
-<div class="file-upload">
 
-   {{fileName || "No file uploaded yet."}}
+<div class="file-upload" style="display:inline-block; width: 25%">
+    <h3>Or upload a new one</h3>
+    {{fileName || "No file uploaded yet."}}
 
     <button (click)="fileUpload.click()">
         Upload file
     </button>
 </div>
+
+<div style="display:inline-block; width: 20%">
+<select id="windowSelect" (change)="onWindowSelected($event)">
+    <option value="" disabled selected>{{ windowDefaultText }}</option>
+    <option *ngFor="let window of windowList" [value]="window">{{ window }}</option>
+</select>
+</div>
+
+<button (click)="onLoadClicked()">
+    Load
+</button>

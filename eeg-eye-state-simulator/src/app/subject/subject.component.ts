@@ -10,10 +10,17 @@ import { ClassifiersApiService } from '../classifiers-api.service';
 export class SubjectComponent implements OnInit {
   // Selector of an existent subject
   subject_list: string[] = [];
-  defaultText = "Select loaded subject...";
+  subjectDefaultText = "Select loaded subject...";
+  selectedSubject = "";
 
   // File uploader
   fileName = '';
+  requiredFileType = '.csv';
+
+  //Window selector
+  windowDefaultText = "Select a time window (default 10s)";
+  windowList: string[] = ["10s with 8s overlap", "8s with 5s overlap", "5s with 3s overlap"];
+  selectedWindow = "";
 
   constructor(private classifiersService: ClassifiersApiService) { }
 
@@ -21,6 +28,10 @@ export class SubjectComponent implements OnInit {
     this.classifiersService.getUploadedSubjects().subscribe(subject_list => {
       this.subject_list = subject_list;
     });
+  }
+
+  onSubjectSelected(event: any): void {
+    this.selectedSubject = event.target.value;
   }
 
   onFileSelected(event: any): void {
@@ -33,6 +44,37 @@ export class SubjectComponent implements OnInit {
 
       this.classifiersService.uploadSubject(file.name, formData).subscribe();
     }
+  }
+
+  onWindowSelected(event: any): void {
+    this.selectedWindow = event.target.value;
+  }
+
+  onLoadClicked(): void {
+    console.log("Loaded");  //TODO: replace with API call
+    var selectedWindow = null;
+
+    // If window is null -> no window is selected
+    if (this.selectedWindow == null) {
+      console.log("No selected window");
+      return;
+    }
+
+    if (this.selectedWindow == this.windowList[0]) {
+      selectedWindow = 10;
+    }
+    else if (this.selectedWindow == this.windowList[1]) {
+      selectedWindow = 8;
+    }
+    else if (this.selectedWindow == this.windowList[2]) {
+      selectedWindow = 5;
+    }
+    else{
+      console.log("Invalid window selection");
+      return;
+    }
+
+    this.classifiersService.windowSubject(this.fileName, selectedWindow).subscribe();
   }
 
 }

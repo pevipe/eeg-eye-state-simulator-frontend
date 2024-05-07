@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -16,7 +16,17 @@ export class ClassifiersApiService {
   }
 
   uploadSubject(fileName: string, formData: FormData): Observable<any> {
-    // return this.http.post(this.baseUrl + '/upload_subject', formData);
+    // let params: HttpParams = new HttpParams().append('subject', fileName);
+    // return this.http.post(this.baseUrl + '/upload_subject', formData, {params: params});
+    
     return of(null);  // mock upload
+  }
+
+  windowSubject(fileName: string, window_size: number): Observable<any> {
+    // let params: HttpParams = new HttpParams();
+    // params = params.append('subject', fileName).append('window', window_size);
+    // return this.http.post(this.baseUrl + '/window_subject', null, {params: params});
+
+    return of(null);  // mock window
   }
 }
