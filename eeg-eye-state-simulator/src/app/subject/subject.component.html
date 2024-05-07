@@ -1,34 +1,53 @@
-<h2>Subject selection</h2>
-
-
-<div id="selection" style="display:inline-block; width: 40%">
-<h3>Select a loaded subject from the list</h3>
-<select id="subjectSelect"  (change)="onSubjectSelected($event)">
-    <option value="" disabled selected>{{ subjectDefaultText }}</option>
-    <option *ngFor="let subject of subject_list" [value]="subject">{{ subject }}</option>
-</select>
-</div>
-
+<h2 style="margin-left:20px">Subject selection</h2>
 
 <input type="file" class="file-input" (change)="onFileSelected($event)" [accept]=requiredFileType #fileUpload>
 
+<div class="grid-container" style="display:grid; grid-template-columns: 35% 65%; margin:20px">
+    <!-- Section titles -->
+    <div class="grid-item">
+        <h3>Select a loaded subject from the list</h3>
+    </div>
+    <div class="grid-item">
+        <h3>Or upload a new one</h3>
+    </div>
+    
+    <!-- Subject selection  -->
+    <div class="grid-item" style="vertical-align: top;">
+        <mat-form-field style="width:90%; height: 100%">
+            <mat-label>Select loaded subject</mat-label>
+            <mat-select (selectionChange)="onSubjectSelected($event.value)">
+            <mat-option *ngFor="let subject of subject_list" [value]="subject">{{ subject }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
 
-<div class="file-upload" style="display:inline-block; width: 25%">
-    <h3>Or upload a new one</h3>
-    {{fileName || "No file uploaded yet."}}
+    <div class="grid-item" style="vertical-align: top; ">
+        <!-- Upload new subject -->
+        <div class="file-upload" style="display:inline-block; width: 40%">        
+            <button mat-flat-button color="primary" style="width: 100%; height:56px" (click)="fileUpload.click()">
+                <div *ngIf="fileName; else showUpload">
+                    {{fileName}}
+                </div>
+                <ng-template #showUpload>
+                    Upload new file
+                    <mat-icon style="vertical-align: middle; text-align: right; margin-left:30px;">folder</mat-icon>
+                </ng-template>
+            </button>
+        </div>
 
-    <button (click)="fileUpload.click()">
-        Upload file
-    </button>
+        <!-- Select time window -->
+        <div style="width:40%; display:inline-block; vertical-align: top; margin-left: 30px">
+            <mat-form-field style="width: 100%">
+                <mat-label>Select a time window (default 10s)</mat-label>
+                <mat-select (selectionChange)="onWindowSelected($event.value)">
+                <mat-option *ngFor="let window of windowList" [value]="window">{{ window }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <button mat-flat-button color="primary" style="height:56px; margin-left:20px; vertical-align: top; display: inline-block" (click)="onLoadClicked()">
+            Load
+        </button>
+    </div>
+
+
 </div>
-
-<div style="display:inline-block; width: 20%">
-<select id="windowSelect" (change)="onWindowSelected($event)">
-    <option value="" disabled selected>{{ windowDefaultText }}</option>
-    <option *ngFor="let window of windowList" [value]="window">{{ window }}</option>
-</select>
-</div>
-
-<button (click)="onLoadClicked()">
-    Load
-</button>

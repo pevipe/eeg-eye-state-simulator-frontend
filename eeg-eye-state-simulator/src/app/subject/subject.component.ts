@@ -30,8 +30,8 @@ export class SubjectComponent implements OnInit {
     });
   }
 
-  onSubjectSelected(event: any): void {
-    this.selectedSubject = event.target.value;
+  onSubjectSelected(subject: string): void {
+    this.selectedSubject = subject;
   }
 
   onFileSelected(event: any): void {
@@ -46,8 +46,8 @@ export class SubjectComponent implements OnInit {
     }
   }
 
-  onWindowSelected(event: any): void {
-    this.selectedWindow = event.target.value;
+  onWindowSelected(window: string): void {
+    this.selectedWindow = window;
   }
 
   onLoadClicked(): void {
