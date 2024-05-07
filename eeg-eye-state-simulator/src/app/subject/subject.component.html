@@ -1,0 +1,21 @@
+<h2>Subject selection</h2>
+
+<label for="subjectSelect">Select a loaded subject from the list      </label>
+
+<select id="subjectSelect">
+    <option value="" disabled selected>{{ defaultText }}</option>
+    <option *ngFor="let subject of subject_list" [value]="subject">{{ subject }}</option>
+</select>
+
+
+<input type="file" class="file-input"
+       (change)="onFileSelected($event)" #fileUpload>
+
+<div class="file-upload">
+
+   {{fileName || "No file uploaded yet."}}
+
+    <button (click)="fileUpload.click()">
+        Upload file
+    </button>
+</div>
