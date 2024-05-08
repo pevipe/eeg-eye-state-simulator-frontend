@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClassifiersApiService {
-  baseUrl = 'http://localhost:8080/classifiers';
+  baseUrl = 'http://localhost:8000/classifiers';
 
   constructor(private http: HttpClient) { }
 
   getUploadedSubjects(): Observable<string[]> {
-    // return this.http.get<string[]>(this.baseUrl + '/uploaded_subjects');
-    return of(["subject_1", "subject_2", "subject_3", "subject_4", "subject_5"]);  // mock subject list
+    return this.http.get<any>(this.baseUrl + '/uploaded_subjects').pipe(
+      map(response => response.data)
+    );
+    // return of(["subject_1", "subject_2", "subject_3", "subject_4", "subject_5"]);  // mock subject list
   }
 
   uploadSubject(fileName: string, formData: FormData): Observable<any> {
