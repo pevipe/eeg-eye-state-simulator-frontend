@@ -1,0 +1,27 @@
+<h2 style="margin-left:20px">Training</h2>
+
+<div class="grid-container" style="display:grid; grid-template-columns: 35% 65%; margin:20px">
+    
+    <!-- Algorithm selection  -->
+    <div class="grid-item" style="vertical-align: top;">
+        <mat-form-field style="width:90%; height: 100%">
+            <mat-label>Select an algorithm</mat-label>
+            <mat-select (selectionChange)="onAlgorithmSelected($event.value)">
+            <mat-option *ngFor="let algorithm of algorithm_list" [value]="algorithm">{{ algorithm }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="grid-item" style="vertical-align: top;">
+        <button mat-flat-button color="primary" style="width: 30%; height:56px; display: inline-block; margin-right:20px;">
+            Optimize hyperparameters
+        </button>
+        <button mat-flat-button color="primary" style="width: 20%; height:56px; display: inline-block; margin-right:20px;">
+            Train
+        </button>
+        <mat-checkbox
+            [disabled]="customParamsUnav">
+            Use custom hyperparameters
+        </mat-checkbox>
+    </div>
+</div>
