@@ -12,6 +12,7 @@ export class SubjectComponent implements OnInit {
   subject_list: string[] = [];
   subjectDefaultText = "Select loaded subject...";
   selectedSubject = "";
+  loadDisabled = this.selectedSubject == "";
 
   // File uploader
   fileName = '';
@@ -24,25 +25,27 @@ export class SubjectComponent implements OnInit {
 
   constructor(private classifiersService: ClassifiersApiService) { }
 
-  ngOnInit(): void {
+  updateSubjectList(): void {
     this.classifiersService.getUploadedSubjects().subscribe(subject_list => {
       this.subject_list = subject_list;
     });
   }
 
+  ngOnInit(): void {
+    this.updateSubjectList();
+  }
+
   onSubjectSelected(subject: string): void {
     this.selectedSubject = subject;
+    this.loadDisabled = this.selectedSubject == "";
   }
 
   onFileSelected(event: any): void {
     const file:File = event.target.files[0];
     if (file){
-      this.fileName = file.name;
-
-      const formData = new FormData();
-      formData.append("thumbnail", file);
-
-      this.classifiersService.uploadSubject(file.name, formData).subscribe();
+      this.classifiersService.uploadSubject(file).subscribe(
+        response => {this.updateSubjectList(); this.fileName = file.name;},
+      );
     }
   }
 

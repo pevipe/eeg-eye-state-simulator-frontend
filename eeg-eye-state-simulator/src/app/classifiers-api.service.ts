@@ -17,11 +17,12 @@ export class ClassifiersApiService {
     // return of(["subject_1", "subject_2", "subject_3", "subject_4", "subject_5"]);  // mock subject list
   }
 
-  uploadSubject(fileName: string, formData: FormData): Observable<any> {
-    // let params: HttpParams = new HttpParams().append('subject', fileName);
-    // return this.http.post(this.baseUrl + '/upload_subject', formData, {params: params});
-    
-    return of(null);  // mock upload
+  uploadSubject(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+    return this.http.post(this.baseUrl + '/upload_subject', formData);
+        
+    // return of(null);  // mock upload
   }
 
   windowSubject(fileName: string, window_size: number): Observable<any> {
