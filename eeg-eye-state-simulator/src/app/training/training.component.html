@@ -5,7 +5,7 @@
     <!-- Algorithm selection  -->
     <div class="grid-item" style="vertical-align: top;">
         <mat-form-field style="width:90%; height: 100%">
-            <mat-label>Select an algorithm</mat-label>
+            <mat-label>{{algorithmDefaultText}}</mat-label>
             <mat-select (selectionChange)="onAlgorithmSelected($event.value)">
             <mat-option *ngFor="let algorithm of algorithm_list" [value]="algorithm">{{ algorithm }}</mat-option>
             </mat-select>
@@ -20,7 +20,7 @@
             Train
         </button>
         <mat-checkbox
-            [disabled]="customParamsUnav">
+            [disabled]="!customParamsAvailable">
             Use custom hyperparameters
         </mat-checkbox>
     </div>

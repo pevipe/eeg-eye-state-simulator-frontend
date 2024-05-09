@@ -32,4 +32,14 @@ export class ClassifiersApiService {
 
     // return of(null);  // mock window
   }
+
+  isOptimized(subjectName: string, algorithm: string, window_size: number): Observable<boolean> {
+    
+    if (subjectName == "Sujeto_1" && algorithm == "AdaBoost" && window_size == 10)  //mock
+      return of(true);
+    else
+      return of(false);
+    // const params = {subject: subjectName, algorithm: algorithm, window: window_size};
+    // return this.http.get<boolean>(this.baseUrl + "/is_optimized", {params: params});
+  }
 }
