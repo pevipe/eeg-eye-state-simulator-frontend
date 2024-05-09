@@ -56,6 +56,7 @@ export class SubjectComponent implements OnInit {
   onLoadClicked(): void {
     console.log("Loaded");  //TODO: replace with API call
     var selectedWindow = null;
+    this.loadDisabled = true;
 
     // If window is null -> no window is selected
     if (this.selectedWindow == null) {
@@ -63,21 +64,19 @@ export class SubjectComponent implements OnInit {
       return;
     }
 
-    if (this.selectedWindow == this.windowList[0]) {
-      selectedWindow = 10;
-    }
-    else if (this.selectedWindow == this.windowList[1]) {
+    if (this.selectedWindow == this.windowList[1]) {
       selectedWindow = 8;
     }
     else if (this.selectedWindow == this.windowList[2]) {
       selectedWindow = 5;
     }
     else{
-      console.log("Invalid window selection");
-      return;
+      selectedWindow = 10;
     }
 
-    this.classifiersService.windowSubject(this.fileName, selectedWindow).subscribe();
+    this.classifiersService.windowSubject(this.selectedSubject, selectedWindow).subscribe(
+      response => {this.loadDisabled = false;}
+    );
   }
 
 }

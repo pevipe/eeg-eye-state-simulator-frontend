@@ -25,11 +25,11 @@ export class ClassifiersApiService {
     // return of(null);  // mock upload
   }
 
-  windowSubject(fileName: string, window_size: number): Observable<any> {
-    // let params: HttpParams = new HttpParams();
-    // params = params.append('subject', fileName).append('window', window_size);
-    // return this.http.post(this.baseUrl + '/window_subject', null, {params: params});
+  windowSubject(subjectName: string, window_size: number): Observable<any> {
+    const data = {"subject": subjectName, "window": window_size};
+    console.log(data);
+    return this.http.post<any>(this.baseUrl + '/window_subject', null, {params: data});
 
-    return of(null);  // mock window
+    // return of(null);  // mock window
   }
 }
