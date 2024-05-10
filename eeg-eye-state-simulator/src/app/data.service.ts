@@ -7,9 +7,11 @@ import { BehaviorSubject } from 'rxjs';
 export class DataService {
   private selectedSubjectSource = new BehaviorSubject<string>('');
   private selectedWindowSource = new BehaviorSubject<number>(10);
+  private selectedTrainSizeSource = new BehaviorSubject<number>(70);
 
   selectedSubject$ = this.selectedSubjectSource.asObservable();
   selectedWindow$ = this.selectedWindowSource.asObservable();
+  selectedTrainSize$ = this.selectedTrainSizeSource.asObservable();
 
   constructor() { }
 
@@ -18,6 +20,9 @@ export class DataService {
   }
   updateSelectedWindow(window: number) {
     this.selectedWindowSource.next(window);
+  }
+  updateTrainSize(trainSize: number) {
+    this.selectedTrainSizeSource.next(trainSize);
   }
 
 }

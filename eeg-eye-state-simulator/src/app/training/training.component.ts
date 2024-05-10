@@ -14,9 +14,13 @@ export class TrainingComponent implements OnInit, OnDestroy{
   selectedSubject: string | undefined;
   selectedWindow: number | undefined;
 
+  //Property from TrainingSetComponent
+  selectedTrainSize: number | undefined;
+
   // Subscriptions to the changes in previous properties
   private selectedSubjectSubscription: Subscription | undefined;
   private selectedWindowSubscription: Subscription | undefined;
+  private selectedTrainSizeSubscription: Subscription | undefined;
   
 
   // Selector of the algorithm
@@ -49,6 +53,11 @@ export class TrainingComponent implements OnInit, OnDestroy{
     this.selectedWindowSubscription = this.dataService.selectedWindow$.subscribe(window => {
       this.selectedWindow = window;
       this.updateCheckboxEnabling();
+    });
+
+    this.selectedTrainSizeSubscription = this.dataService.selectedTrainSize$.subscribe(trainSize => {
+      this.selectedTrainSize = trainSize;
+      console.log("CHANGING SELECTED TRAIN SET SIZE TO: " + trainSize + "%");
     });
   }
   ngOnDestroy(): void {

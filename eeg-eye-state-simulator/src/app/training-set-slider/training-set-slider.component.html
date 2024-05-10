@@ -1,0 +1,13 @@
+<div style="text-align:center">
+    <h3 style="text-align: left; margin-left:30px;">Select train set size</h3>
+    <label class="example-value-label">{{slider.value}}</label>
+    <mat-slider
+      [max]="max"
+      [min]="min"
+      [step]="step"
+      [discrete]="thumbLabel"
+      [showTickMarks]="showTicks"
+      (input)="onSliderChange($event)">
+    <input matSliderThumb [(ngModel)]="value" #slider>
+    </mat-slider>
+</div>
