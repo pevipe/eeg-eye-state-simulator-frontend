@@ -34,12 +34,26 @@ export class ClassifiersApiService {
   }
 
   isOptimized(subjectName: string, algorithm: string, window_size: number): Observable<boolean> {
-    
-    if (subjectName == "Sujeto_1" && algorithm == "AdaBoost" && window_size == 10)  //mock
-      return of(true);
-    else
+    if (subjectName == "" || algorithm == ""){
       return of(false);
-    // const params = {subject: subjectName, algorithm: algorithm, window: window_size};
-    // return this.http.get<boolean>(this.baseUrl + "/is_optimized", {params: params});
+    }
+
+    // Convert to format in API
+    var alg: string = algorithm;
+    if (algorithm == "Linear Discriminant Analysis")
+      alg = "LDA";
+    else if (algorithm == "Quadratic Discriminant Analysis")
+      alg = "QDA";
+    else if (algorithm == "Support Vector Machine")
+      alg = "SVM";
+    else if (algorithm == "k-Nearest Neighbors")
+      alg = "kNN";
+    const params = {subject: subjectName, algorithm: alg, window: window_size};
+    return this.http.get<boolean>(this.baseUrl + "/is_optimized", {params: params});
+
+    // if (subjectName == "Sujeto_1" && algorithm == "AdaBoost" && window_size == 10)  //mock
+    //   return of(true);
+    // else
+    //   return of(false);
   }
 }
