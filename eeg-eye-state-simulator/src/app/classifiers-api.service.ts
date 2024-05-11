@@ -33,27 +33,45 @@ export class ClassifiersApiService {
     // return of(null);  // mock window
   }
 
+  private toApiFormat(algorithm: string): string {
+    if (algorithm == "Linear Discriminant Analysis")
+      return "LDA";
+    else if (algorithm == "Quadratic Discriminant Analysis")
+      return "QDA";
+    else if (algorithm == "Support Vector Machine")
+      return "SVM";
+    else if (algorithm == "k-Nearest Neighbors")
+      return "kNN";
+    else if (algorithm == "Decision Tree")
+      return "DecisionTree";
+    else if (algorithm == "Random Forest")
+      return "RandomForest";
+    
+    return algorithm;
+  }
+
   isOptimized(subjectName: string, algorithm: string, window_size: number): Observable<boolean> {
+    // When called without parameters, return false
     if (subjectName == "" || algorithm == ""){
       return of(false);
     }
 
-    // Convert to format in API
-    var alg: string = algorithm;
-    if (algorithm == "Linear Discriminant Analysis")
-      alg = "LDA";
-    else if (algorithm == "Quadratic Discriminant Analysis")
-      alg = "QDA";
-    else if (algorithm == "Support Vector Machine")
-      alg = "SVM";
-    else if (algorithm == "k-Nearest Neighbors")
-      alg = "kNN";
-    const params = {subject: subjectName, algorithm: alg, window: window_size};
+    const params = {subject: subjectName, algorithm: this.toApiFormat(algorithm), window: window_size};
     return this.http.get<boolean>(this.baseUrl + "/is_optimized", {params: params});
 
     // if (subjectName == "Sujeto_1" && algorithm == "AdaBoost" && window_size == 10)  //mock
     //   return of(true);
     // else
     //   return of(false);
+  }
+
+  optimize(subjectName: string, algorithm: string, window_size: number): Observable<any> {
+    // Convert to format in API
+    var alg: string = algorithm;
+
+    const params = {subject: subjectName, algorithm: this.toApiFormat(algorithm), window: window_size};
+    return this.http.post<any>(this.baseUrl + "/optimize", null, {params: params});
+    
+    // return of(null);  // mock optimize
   }
 }

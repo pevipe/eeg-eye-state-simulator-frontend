@@ -14,6 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { TrainingComponent } from './training/training.component';
 import { TrainingSetSliderComponent } from './training-set-slider/training-set-slider.component';
@@ -32,7 +34,9 @@ import { TrainingSetSliderComponent } from './training-set-slider/training-set-s
     MatFormFieldModule, MatInputModule, MatSelectModule,
     MatIconModule, MatButtonModule,
     MatCheckboxModule, 
-    MatSliderModule, FormsModule
+    MatSliderModule, FormsModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule
   ],
   providers: [
     provideClientHydration(),

@@ -12,22 +12,38 @@
         </mat-form-field>
     </div>
 
+    <!-- Buttons optimization -->
     <div class="grid-item" style="vertical-align: top;">
-        <button 
-        mat-flat-button color="primary" 
-        style="width: 30%; height:56px; display: inline-block; margin-right:20px;"
-        [disabled]="buttonsDisabled">
-            Optimize hyperparameters
-        </button>
-        <button
-        mat-flat-button color="primary"
-        style="width: 20%; height:56px; display: inline-block; margin-right:20px;"
-        [disabled]="buttonsDisabled">
-            Train
-        </button>
+        <div
+        matTooltip="Subject and algorithm must be selected" 
+        [matTooltipDisabled]="!buttonsDisabled"
+        style="height:56px; width: 30%; margin-right:20px; vertical-align: top; display: inline-block;">
+            <button
+            mat-flat-button color="primary" 
+            style=" width:100%; height:100%;"
+            [disabled]="buttonsDisabled"
+            (click)="onOptimizeClicked()">
+                Optimize hyperparameters
+            </button>
+        </div>
+        
+        <div
+        matTooltip="Subject and algorithm must be selected" 
+        [matTooltipDisabled]="!buttonsDisabled"
+        style="height:56px; width: 20%; margin-right:20px; vertical-align: top; display: inline-block;">
+            <button
+            mat-flat-button color="primary"
+            style=" width:100%; height:100%;"
+            [disabled]="buttonsDisabled">
+                Train
+            </button>
+        </div>
         <mat-checkbox
             [disabled]="!customParamsAvailable">
             Use custom hyperparameters
         </mat-checkbox>
+        <div *ngIf="optimizing" style="vertical-align: middle; display:inline-block; height:56px; margin-left:20px">
+            <mat-spinner [diameter]="50"></mat-spinner>
+        </div>
     </div>
 </div>

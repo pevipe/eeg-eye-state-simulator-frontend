@@ -39,6 +39,7 @@ export class TrainingComponent implements OnInit, OnDestroy{
 
   customParamsAvailable = false;
   checkedCustomParams = false;
+  optimizing = false;
 
 
   constructor(private classifiersService: ClassifiersApiService, 
@@ -87,7 +88,14 @@ export class TrainingComponent implements OnInit, OnDestroy{
   }
 
   onOptimizeClicked(): void {
-    console.log("Optimize clicked");
+    this.buttonsDisabled = true;
+    this.optimizing = true;
+    this.classifiersService.optimize(this.selectedSubject ?? '', this.selectedAlgorithm, this.selectedWindow ?? 10).subscribe(data => {
+      console.log(data);
+      this.buttonsDisabled = false;
+      this.optimizing = false;
+      this.updateCheckboxEnabling();
+    });
   }
 
   onCheckboxClicked(): void{

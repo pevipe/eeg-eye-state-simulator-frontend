@@ -44,13 +44,16 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <button mat-flat-button color="primary" 
-        style="height:56px; margin-left:20px; vertical-align: top; display: inline-block" 
-        (click)="onLoadClicked()"
-        [disabled]="loadDisabled">
-            Load
-        </button>
+        <div
+        matTooltip="Subject must be selected" 
+        [matTooltipDisabled]="!loadDisabled" 
+        style="height:56px; margin-left:20px; vertical-align: top; display: inline-block">
+            <button mat-flat-button color="primary" style="height:100%"
+            (click)="onLoadClicked()"
+            [disabled]="loadDisabled"
+            >
+                Load
+            </button>
+        </div>
     </div>
-
-
 </div>
