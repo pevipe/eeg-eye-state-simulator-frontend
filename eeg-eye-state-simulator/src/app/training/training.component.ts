@@ -35,6 +35,7 @@ export class TrainingComponent implements OnInit, OnDestroy{
   ];
   algorithmDefaultText = "Select an algorithm...";
   selectedAlgorithm = "";
+  buttonsDisabled = true;
 
   customParamsAvailable = false;
   checkedCustomParams = false;
@@ -44,10 +45,12 @@ export class TrainingComponent implements OnInit, OnDestroy{
               private dataService: DataService) { }
   ngOnInit(): void {
     this.updateCheckboxEnabling();
+    this.updateButtonsEnabling();
 
     this.selectedSubjectSubscription = this.dataService.selectedSubject$.subscribe(subject => {
       this.selectedSubject = subject;
       this.updateCheckboxEnabling();
+      this.updateButtonsEnabling();
     });
 
     this.selectedWindowSubscription = this.dataService.selectedWindow$.subscribe(window => {
@@ -57,7 +60,6 @@ export class TrainingComponent implements OnInit, OnDestroy{
 
     this.selectedTrainSizeSubscription = this.dataService.selectedTrainSize$.subscribe(trainSize => {
       this.selectedTrainSize = trainSize;
-      console.log("CHANGING SELECTED TRAIN SET SIZE TO: " + trainSize + "%");
     });
   }
   ngOnDestroy(): void {
@@ -74,9 +76,18 @@ export class TrainingComponent implements OnInit, OnDestroy{
     });
   }
 
+  updateButtonsEnabling(): void{
+    this.buttonsDisabled = (this.selectedSubject == "" || this.selectedAlgorithm == "");
+  }
+
   onAlgorithmSelected(algorithm: string): void {
     this.selectedAlgorithm = algorithm;
     this.updateCheckboxEnabling();
+    this.updateButtonsEnabling();
+  }
+
+  onOptimizeClicked(): void {
+    console.log("Optimize clicked");
   }
 
   onCheckboxClicked(): void{

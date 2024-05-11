@@ -13,10 +13,16 @@
     </div>
 
     <div class="grid-item" style="vertical-align: top;">
-        <button mat-flat-button color="primary" style="width: 30%; height:56px; display: inline-block; margin-right:20px;">
+        <button 
+        mat-flat-button color="primary" 
+        style="width: 30%; height:56px; display: inline-block; margin-right:20px;"
+        [disabled]="buttonsDisabled">
             Optimize hyperparameters
         </button>
-        <button mat-flat-button color="primary" style="width: 20%; height:56px; display: inline-block; margin-right:20px;">
+        <button
+        mat-flat-button color="primary"
+        style="width: 20%; height:56px; display: inline-block; margin-right:20px;"
+        [disabled]="buttonsDisabled">
             Train
         </button>
         <mat-checkbox
