@@ -19,6 +19,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { TrainingComponent } from './training/training.component';
 import { TrainingSetSliderComponent } from './training-set-slider/training-set-slider.component';
+import { NgChartsModule } from 'ng2-charts';
+import { GraphComponent } from './graph/graph.component';
+
 
 
 @NgModule({
@@ -26,7 +29,8 @@ import { TrainingSetSliderComponent } from './training-set-slider/training-set-s
     AppComponent,
     SubjectComponent,
     TrainingComponent,
-    TrainingSetSliderComponent
+    TrainingSetSliderComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,8 @@ import { TrainingSetSliderComponent } from './training-set-slider/training-set-s
     MatCheckboxModule, 
     MatSliderModule, FormsModule,
     MatProgressSpinnerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    NgChartsModule,
   ],
   providers: [
     provideClientHydration(),

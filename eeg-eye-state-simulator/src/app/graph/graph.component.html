@@ -1,0 +1,11 @@
+<h2 style="text-align: center;">Accuracy graph</h2>
+<div style="text-align: center;">
+    <canvas *ngIf="isBrowser" style="text-align: center;"
+        baseChart
+        [data]="barChartData"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [type]="'bar'">
+    </canvas>
+</div>
