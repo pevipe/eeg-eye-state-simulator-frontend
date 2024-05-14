@@ -22,6 +22,7 @@ import { TrainingSetSliderComponent } from './training-set-slider/training-set-s
 import { NgChartsModule } from 'ng2-charts';
 import { GraphComponent } from './graph/graph.component';
 import { SimulationComponent } from './simulation/simulation.component';
+import { SimulationGraphComponent } from './simulation/simulation-graph/simulation-graph.component';
 
 
 
@@ -32,7 +33,8 @@ import { SimulationComponent } from './simulation/simulation.component';
     TrainingComponent,
     TrainingSetSliderComponent,
     GraphComponent,
-    SimulationComponent
+    SimulationComponent,
+    SimulationGraphComponent
   ],
   imports: [
     BrowserModule,
