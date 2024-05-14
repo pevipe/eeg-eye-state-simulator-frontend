@@ -92,7 +92,6 @@ export class TrainingComponent implements OnInit, OnDestroy{
     this.buttonsDisabled = true;
     this.optimizing = true;
     this.classifiersService.optimize(this.selectedSubject ?? '', this.selectedAlgorithm, this.selectedWindow ?? 10).subscribe(data => {
-      console.log(data);
       this.buttonsDisabled = false;
       this.optimizing = false;
       this.updateCheckboxEnabling();
@@ -100,12 +99,10 @@ export class TrainingComponent implements OnInit, OnDestroy{
   }
 
   onTrainClicked(): void{
-    console.log("Train clicked")
     this.buttonsDisabled = true;
     this.customParamsAvailable = false;
     this.classifiersService.train(this.selectedSubject ?? '', this.selectedAlgorithm, this.selectedWindow ?? 10, 
                                   this.selectedTrainSize ?? 80, this.checkedCustomParams).subscribe(data => {
-      console.log(data);
       this.dataService.updateGraphData([data.precision_opened, data.precision_closed, data.accuracy])
       this.buttonsDisabled = false;
       this.updateCheckboxEnabling();

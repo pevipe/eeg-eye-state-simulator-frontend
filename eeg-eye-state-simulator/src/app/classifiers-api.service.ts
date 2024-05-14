@@ -27,7 +27,6 @@ export class ClassifiersApiService {
 
   windowSubject(subjectName: string, window_size: number): Observable<any> {
     const data = {"subject": subjectName, "window": window_size};
-    console.log(data);
     return this.http.post<any>(this.baseUrl + '/window_subject', null, {params: data});
 
     // return of(null);  // mock window

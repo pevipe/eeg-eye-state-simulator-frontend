@@ -2,7 +2,7 @@
 <div class="grid-container">
     <div class="inline-input">
         Predicted state will change after 
-        <input matInput type="number" [(ngModel)]="numberOfWindows" class="input-inline" min="1" max="5">
+        <input matInput type="number" [(ngModel)]="numberOfWindows" (ngModelChange)="onNumberOfWindowsChange($event)" class="input-inline" min="minNumberOfWindows" max="maxNumberOfWindows">
         consecutive coincident predictions.
     </div>
 
