@@ -1,37 +1,66 @@
 import { isPlatformBrowser } from '@angular/common';
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { ChartConfiguration } from 'chart.js';
+import { DataService } from '../data.service';
+import { ClassifiersApiService } from '../classifiers-api.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
   styleUrl: './graph.component.scss'
 })
-export class GraphComponent  {
-  title = 'ng2-charts-demo';
+export class GraphComponent implements OnInit{
+  //Control variables
   isBrowser: boolean;
+  showGraph = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    this.isBrowser = isPlatformBrowser(platformId);
-  }
-  
-
+  //Graph variables
   public barChartLegend = false;
   public barChartPlugins = [];
 
+  // Graph data
+  graphData: [number, number, number] = [-1, -1, -1];
+  private graphDataSubscription: Subscription | undefined;
+
+  // Chart initialization
   public barChartData: ChartConfiguration<'bar'>['data'] = {
     labels: [ 'Opened', 'Closed', 'Total' ],
     datasets: [
-      { data: [ 0.92, 0.89, .85 ] },
+      { data: this.graphData },
     ]
   };
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
     responsive: true,
     scales: {
-      y: { beginAtZero: false, max: 1, min: .50,  },
+      y: { beginAtZero: false, max: 1, min: .50,  },  //TODO: poner en función de los datos
     },
   };
 
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object,
+              private dataService: DataService,
+              private classifiersApiService: ClassifiersApiService) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
+
+  ngOnInit(): void {
+    this.graphDataSubscription = this.dataService.graphData$.subscribe(graphData => {
+      if (graphData[0] != -1 && graphData[1] != -1 && graphData[2] != -1) {
+        this.graphData = graphData;
+        this.createChart();
+        this.showGraph = true;
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.graphDataSubscription?.unsubscribe();
+  }
+
+  createChart() {
+    this.barChartData.datasets[0].data = this.graphData;
+  }
 
 }

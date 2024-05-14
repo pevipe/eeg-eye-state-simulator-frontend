@@ -34,12 +34,14 @@
             <button
             mat-flat-button color="primary"
             style=" width:100%; height:100%;"
-            [disabled]="buttonsDisabled">
+            [disabled]="buttonsDisabled"
+            (click)="onTrainClicked()">
                 Train
             </button>
         </div>
         <mat-checkbox
-            [disabled]="!customParamsAvailable">
+            [disabled]="!customParamsAvailable"
+            [(ngModel)]="checkedCustomParams">
             Use custom hyperparameters
         </mat-checkbox>
         <div *ngIf="optimizing" style="vertical-align: middle; display:inline-block; height:56px; margin-left:20px">

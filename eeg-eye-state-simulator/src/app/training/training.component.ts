@@ -67,6 +67,7 @@ export class TrainingComponent implements OnInit, OnDestroy{
     // Free subscriptions
     this.selectedSubjectSubscription?.unsubscribe();
     this.selectedWindowSubscription?.unsubscribe();
+    this.selectedTrainSizeSubscription?.unsubscribe();
   }
 
   updateCheckboxEnabling(): void{
@@ -98,7 +99,16 @@ export class TrainingComponent implements OnInit, OnDestroy{
     });
   }
 
-  onCheckboxClicked(): void{
-
+  onTrainClicked(): void{
+    console.log("Train clicked")
+    this.buttonsDisabled = true;
+    this.customParamsAvailable = false;
+    this.classifiersService.train(this.selectedSubject ?? '', this.selectedAlgorithm, this.selectedWindow ?? 10, 
+                                  this.selectedTrainSize ?? 80, this.checkedCustomParams).subscribe(data => {
+      console.log(data);
+      this.dataService.updateGraphData([data.precision_opened, data.precision_closed, data.accuracy])
+      this.buttonsDisabled = false;
+      this.updateCheckboxEnabling();
+    });
   }
 }

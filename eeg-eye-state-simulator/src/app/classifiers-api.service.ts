@@ -74,4 +74,11 @@ export class ClassifiersApiService {
     
     // return of(null);  // mock optimize
   }
+
+  train(subjectName: string, algorithm: string, window_size: number, train_size: number, useCustomHyperparams: boolean): Observable<any> {
+    const params = {subject: subjectName, algorithm: this.toApiFormat(algorithm), window: window_size, train_set_size: train_size, use_optimized_hyperparams: useCustomHyperparams};
+    return this.http.post<any>(this.baseUrl + "/train", null, {params: params});
+    
+    // return of(null);  // mock train
+  }
 }
