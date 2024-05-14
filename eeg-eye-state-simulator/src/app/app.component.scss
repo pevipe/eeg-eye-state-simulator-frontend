@@ -170,7 +170,7 @@ main {
 .item2 { grid-area: training; }
 .item3 { grid-area: training2; margin-bottom:30px; margin-top: -30px; }
 .item4 { grid-area: graph; margin-left:30px; width:30vw; height:17vw;}
-.item5 { grid-area: simulation; width: 55vw;}
+.item5 { grid-area: simulation; width: 55vw; border:1px solid whitesmoke;}
 
 .grid-container {
   display: grid;

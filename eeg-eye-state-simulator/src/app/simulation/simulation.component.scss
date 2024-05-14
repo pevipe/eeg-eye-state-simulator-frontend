@@ -1,0 +1,54 @@
+.inline-input {
+    display: inline-block;
+    align-items: center;
+    font-size: medium;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 10px;
+    // background-color: rgba(255, 255, 255, 0.8);
+}
+
+.input-inline {
+    width: 30px;
+    margin: 0 5px;
+    padding: 0;
+    font-size: inherit;
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid currentColor;
+    background-color: inherit;
+    color: inherit;
+}
+
+.input-inline:focus {
+    outline: none;
+    border-bottom: 2px solid currentColor;
+}
+
+.grid-container {
+    display: grid;
+    gap: 5px;
+    // grid-template-areas: 'inline-input timeline';
+    // background-color: #2196F3;
+    grid-template-columns: 50% 50%;
+    grid-template-areas: 
+        'inline-input timeline'
+        'simulation-graph timeline'
+        'simulation-graph timeline';
+    
+    // padding: 10px;
+}
+.timeline {
+    display: inline-block;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 10px;
+
+    // background-color: rgba(255, 255, 255, 0.8);
+}
+.simulation-graph {
+    display: inline-block;
+    // background-color: rgba(255, 255, 255, 0.8);
+    // text-align: center;
+    // width: 50%;
+}
