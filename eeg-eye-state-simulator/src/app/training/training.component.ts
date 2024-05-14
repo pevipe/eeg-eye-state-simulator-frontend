@@ -109,6 +109,11 @@ export class TrainingComponent implements OnInit, OnDestroy{
       this.dataService.updateGraphData([data.precision_opened, data.precision_closed, data.accuracy])
       this.buttonsDisabled = false;
       this.updateCheckboxEnabling();
+      let newList: string[] = [];
+      for (let i = 0; i < data.predicted_tags_in_test.length; i++) {
+        newList.push((i*2).toString());
+      }
+      this.dataService.updateSimulationGraphData(data.real_tags_in_test, data.predicted_tags_in_test, newList);
     });
   }
 }

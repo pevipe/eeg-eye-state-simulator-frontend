@@ -49,7 +49,7 @@ export class GraphComponent implements OnInit{
     this.graphDataSubscription = this.dataService.graphData$.subscribe(graphData => {
       if (graphData[0] != -1 && graphData[1] != -1 && graphData[2] != -1) {
         this.graphData = graphData;
-        this.createChart();
+        this.updateChart();
         this.showGraph = true;
       }
     });
@@ -59,8 +59,13 @@ export class GraphComponent implements OnInit{
     this.graphDataSubscription?.unsubscribe();
   }
 
-  createChart() {
-    this.barChartData.datasets[0].data = this.graphData;
+  updateChart() {
+    this.barChartData = {
+      labels: [ 'Opened', 'Closed', 'Total' ],
+      datasets: [
+        { data: this.graphData },
+      ]
+    }
   }
 
 }

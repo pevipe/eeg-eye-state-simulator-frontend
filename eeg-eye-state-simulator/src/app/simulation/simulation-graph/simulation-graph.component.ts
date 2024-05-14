@@ -1,4 +1,4 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, Inject, Input, OnChanges, PLATFORM_ID, SimpleChanges } from '@angular/core';
 import { DataService } from '../../data.service';
 import { ClassifiersApiService } from '../../classifiers-api.service';
 import { isPlatformBrowser } from '@angular/common';
@@ -10,39 +10,79 @@ import { ChartConfiguration } from 'chart.js';
   templateUrl: './simulation-graph.component.html',
   styleUrl: './simulation-graph.component.scss'
 })
-export class SimulationGraphComponent {
+export class SimulationGraphComponent implements OnChanges{
   isBrowser: boolean;
   showGraph = false;
 
-    //Graph variables
-    public barChartLegend = false;
-    public barChartPlugins = [];
-  
-    // Graph data
-    graphData: [number, number, number] = [-1, -1, -1];
-    private graphDataSubscription: Subscription | undefined;
-  
-    // Chart initialization
-    public barChartData: ChartConfiguration<'bar'>['data'] = {
-      labels: [ 'Opened', 'Closed', 'Total' ],
-      datasets: [
-        { data: this.graphData },
-      ]
-    };
-  
-    public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-      responsive: true,
-      scales: {
-        y: { beginAtZero: false, max: 1, min: .50,  },  //TODO: poner en función de los datos
-      },
-    };
+  //Graph variables
+  public lineChartLegend = false;
+  // public barChartPlugins = [];
 
+  // Graph data
+  @Input() realChartDataset: any;
+  @Input() predictedChartDataset: any;
+  @Input() chartLabels: any;
 
+  // Chart initialization
+  public lineChartOptions: ChartConfiguration<'line'>['options'] = {
+    responsive: true,
+    scales: {
+      y: { max: 1.2,  },  
+    },
+    maintainAspectRatio: false
+  };
+
+  public realChartData: ChartConfiguration<'line'>['data'] = {
+    labels: [],
+    datasets: [{
+      // { data: this.graphData }, //TODO: poner en función de los datos
+      data: [],
+      stepped: true
+    }]
+  };
+    
+  public predictedChartData: ChartConfiguration<'line'>['data'] = {
+    labels: [],
+    datasets: [{
+      // { data: this.graphData }, //TODO: poner en función de los datos
+      data: [],
+      stepped: true
+    }]
+  };
+  
+  
   constructor(@Inject(PLATFORM_ID) private platformId: Object,
               private dataService: DataService,
               private classifiersApiService: ClassifiersApiService) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.realChartDataset && this.predictedChartDataset && this.chartLabels){
+      if (this.realChartDataset.length !== 0 && this.predictedChartDataset.length !== 0 && this.chartLabels.length !== 0){
+
+        this.updateCharts();
+        this.showGraph = true;
+      }
+    }
+  }
+
+  updateCharts(){
+    this.realChartData = {
+      datasets: [{
+        data: this.realChartDataset,
+        stepped: true
+      }],
+      labels: this.chartLabels
+    }
+    this.predictedChartData = {
+      datasets: [{
+        data: this.predictedChartDataset,
+        stepped: true
+      }],
+      labels: this.chartLabels
+    }
+
+  }
 
 }

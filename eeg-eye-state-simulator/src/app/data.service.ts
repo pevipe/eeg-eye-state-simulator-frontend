@@ -9,11 +9,17 @@ export class DataService {
   private selectedWindowSource = new BehaviorSubject<number>(10);
   private selectedTrainSizeSource = new BehaviorSubject<number>(70);
   private graphDataSource = new BehaviorSubject<[number, number, number]>([-1, -1, -1]);
+  private simulationGraphStructSource = new BehaviorSubject<[number[], number[], string[]]>([[], [], []]);
+  // private realGraphDataSource = new BehaviorSubject<number[]>([]);
+  // private predictedGraphDataSource = new BehaviorSubject<number[]>([]);
+  // private graphLabelsSource = new BehaviorSubject<string[]>([]);
+
 
   selectedSubject$ = this.selectedSubjectSource.asObservable();
   selectedWindow$ = this.selectedWindowSource.asObservable();
   selectedTrainSize$ = this.selectedTrainSizeSource.asObservable();
   graphData$ = this.graphDataSource.asObservable();
+  simulationGraphStruct$ = this.simulationGraphStructSource.asObservable();
 
   constructor() { }
 
@@ -28,6 +34,9 @@ export class DataService {
   }
   updateGraphData(data: [number, number, number]) {
     this.graphDataSource.next(data);
+  }
+  updateSimulationGraphData(realData: number[], predictedDate: number[], labels: string[]) {
+    this.simulationGraphStructSource.next([realData, predictedDate, labels]);
   }
 
 }
