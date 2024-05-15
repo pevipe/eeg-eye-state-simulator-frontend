@@ -27,11 +27,6 @@ export class SimulationTimelineComponent implements OnChanges {
     }
   }
   updateAccuracy() {
-    // Implementar AND entre realData y predictedData
-    // Puedes implementar la lógica según tus necesidades
-    // Por ejemplo, comparar si los valores son iguales
-    console.log('Real', this.realData)
-    console.log('Predicted', this.predictedData)
     var total = 0;
     for (var i = 0; i < this.realData.length; i++) {
       if (this.realData[i] === this.predictedData[i]) {
