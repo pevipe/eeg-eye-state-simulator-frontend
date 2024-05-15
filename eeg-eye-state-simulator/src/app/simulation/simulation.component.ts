@@ -9,7 +9,7 @@ import { DataService } from '../data.service';
 })
 export class SimulationComponent implements OnInit{
   minNumberOfWindows:number = 1;
-  maxNumberOfWindows:number = 10;
+  maxNumberOfWindows:number = 7;
   numberOfWindows:number = 1;
   realChartData: number[] | undefined;
   predictedChartData: number[] | undefined;

@@ -16,6 +16,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { TrainingComponent } from './training/training.component';
 import { TrainingSetSliderComponent } from './training-set-slider/training-set-slider.component';
@@ -23,6 +24,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { GraphComponent } from './graph/graph.component';
 import { SimulationComponent } from './simulation/simulation.component';
 import { SimulationGraphComponent } from './simulation/simulation-graph/simulation-graph.component';
+import { SimulationTimelineComponent } from './simulation/simulation-timeline/simulation-timeline.component';
 
 
 
@@ -34,7 +36,8 @@ import { SimulationGraphComponent } from './simulation/simulation-graph/simulati
     TrainingSetSliderComponent,
     GraphComponent,
     SimulationComponent,
-    SimulationGraphComponent
+    SimulationGraphComponent,
+    SimulationTimelineComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { SimulationGraphComponent } from './simulation/simulation-graph/simulati
     MatProgressSpinnerModule,
     MatTooltipModule,
     NgChartsModule,
+    MatGridListModule,
   ],
   providers: [
     provideClientHydration(),

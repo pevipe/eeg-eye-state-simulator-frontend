@@ -31,10 +31,7 @@
     // grid-template-areas: 'inline-input timeline';
     // background-color: #2196F3;
     grid-template-columns: 50% 50%;
-    grid-template-areas: 
-        'inline-input timeline'
-        'simulation-graph timeline'
-        'simulation-graph timeline';
+    grid-template-areas: 'inline-input timeline';
     
     // padding: 10px;
 }
@@ -54,4 +51,8 @@
     // background-color: rgba(255, 255, 255, 0.8);
     // text-align: center;
     // width: 50%;
+}
+.inline-input{
+    height:fit-content;
+    // background-color: yellow;
 }

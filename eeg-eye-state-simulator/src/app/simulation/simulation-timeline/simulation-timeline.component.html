@@ -1,0 +1,52 @@
+<div class="timeline">
+    <div class="play-buttons" style="width: 100%; text-align: center; margin-bottom: 20px;">
+      <!-- Botones de play/pausa -->
+        <button mat-fab color="primary" aria-label="Stop button" style="margin-left:5px; margin-right: 5px" (click)="stop()">
+            <mat-icon>stop</mat-icon>
+        </button>  
+        <button mat-fab color="primary" aria-label="Play button" style="margin-left:5px; margin-right: 5px" (click)="play()">
+            <mat-icon>play_arrow</mat-icon>
+        </button>
+        <button mat-fab color="primary" aria-label="Pause button" style="margin-left:5px; margin-right: 5px" (click)="pause()">
+            <mat-icon>pause</mat-icon>
+        </button>
+    </div>
+    <div>
+        <div *ngIf="showTimeline">
+            <mat-grid-list cols="4">
+                <mat-grid-tile [colspan]="3" [rowspan]="1">
+                    <div class="line-container">
+                        <!-- Timeline -->
+                        <div class="line"></div>
+                        <div class="ball" [ngStyle]="{ left: ballPosition + '%' }"></div>
+                    </div>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                    <p>{{currentTime}} s</p>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </div>
+
+        <div *ngIf="!showTimeline"
+        style="text-align: justify; width:100%; height:300px; text-wrap:wrap; vertical-align: middle; border: 1px solid whitesmoke">
+            <p style="font-size:large; vertical-align: middle; margin: 15px;">Timeline is not available.</p>
+            <p style="font-size:large; vertical-align: middle; margin: 15px;">Please, click "train" to obtain a representation.</p>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="showTimeline">
+    <div *ngIf="realData[arrayIndex]==1; else realClosed">
+        <h3>Real state: OPENED</h3>
+    </div>
+    <ng-template #realClosed>
+        <h3>Real state: CLOSED</h3>
+    </ng-template>
+    <div *ngIf="predictedData[arrayIndex]==1; else predictedClosed">
+        <h3>Predicted state: OPENED</h3>
+    </div>
+    <ng-template #predictedClosed>
+        <h3>Predicted state: CLOSED</h3>
+    </ng-template>
+    <h3>Total accuracy: {{totalAccuracy}}%</h3>
+</div>
