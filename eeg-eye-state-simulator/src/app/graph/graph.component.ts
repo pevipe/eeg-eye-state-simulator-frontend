@@ -63,7 +63,10 @@ export class GraphComponent implements OnInit{
     this.barChartData = {
       labels: [ 'Opened', 'Closed', 'Total' ],
       datasets: [
-        { data: this.graphData },
+        { data: this.graphData,
+          backgroundColor: [ 'rgba(255, 99, 132, 0.4)', 'rgba(54, 162, 235, 0.4)', 'rgba(255, 206, 86, 0.4)' ],
+          borderColor: [ 'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)' ],
+         },
       ]
     }
   }

@@ -29,7 +29,14 @@ export class SimulationGraphComponent implements OnChanges{
     scales: {
       y: { max: 1.2,  },  
     },
-    maintainAspectRatio: false
+    maintainAspectRatio: false,
+    elements: {
+      point: {
+        radius: 1.5,
+        backgroundColor:'rgba(99, 255, 198, 0.2)',
+        borderColor: 'rgba(99, 255, 198, 1)',
+      }
+    }
   };
 
   public realChartData: ChartConfiguration<'line'>['data'] = {
@@ -60,7 +67,6 @@ export class SimulationGraphComponent implements OnChanges{
   ngOnChanges(changes: SimpleChanges): void {
     if (this.realChartDataset && this.predictedChartDataset && this.chartLabels){
       if (this.realChartDataset.length !== 0 && this.predictedChartDataset.length !== 0 && this.chartLabels.length !== 0){
-
         this.updateCharts();
         this.showGraph = true;
       }
@@ -71,14 +77,16 @@ export class SimulationGraphComponent implements OnChanges{
     this.realChartData = {
       datasets: [{
         data: this.realChartDataset,
-        stepped: true
+        stepped: true,
+        borderColor: 'rgba(99, 255, 198, 1)',
       }],
       labels: this.chartLabels
     }
     this.predictedChartData = {
       datasets: [{
         data: this.predictedChartDataset,
-        stepped: true
+        stepped: true,
+        borderColor: 'rgba(245, 169, 71, 1)',
       }],
       labels: this.chartLabels
     }
