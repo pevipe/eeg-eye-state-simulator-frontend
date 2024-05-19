@@ -33,7 +33,6 @@ export class SimulationTimelineComponent implements OnChanges {
         total++;
       }
     }
-    console.log('Coincident', total)
     this.totalAccuracy = Math.round(total / this.realData.length * 10000)/100;
   }
 
