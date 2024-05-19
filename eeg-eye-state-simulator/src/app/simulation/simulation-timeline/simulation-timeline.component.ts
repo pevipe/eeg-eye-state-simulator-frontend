@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { TelegramMessagesService } from '../../telegram-messages.service';
 
 @Component({
   selector: 'app-simulation-timeline',
@@ -13,10 +14,13 @@ export class SimulationTimelineComponent implements OnChanges {
   ballPosition = 0;
   showTimeline = false;
   totalAccuracy = 0;
+  sendMessage = false;
+  prevArrayVal = -1;
 
   @Input() realData: any;
   @Input() predictedData: any;
 
+  constructor(private telegramService: TelegramMessagesService) { }
 
   ngOnChanges(): void {
     if (this.realData && this.predictedData) {
@@ -70,12 +74,20 @@ export class SimulationTimelineComponent implements OnChanges {
       this.playing = false;
       clearInterval(this.id);
       this.currentTime = this.realData.length * 2;
-      // this.currentArrayValue = this.array[this.array.length - 1];
       this.arrayIndex = this.realData.length - 1;
       return;
     }
-    // this.currentArrayValue = this.array[Math.floor(index)];
     this.arrayIndex = Math.floor(index);
     this.ballPosition = index/this.realData.length * 100;
+
+    if (this.sendMessage){
+      if (this.prevArrayVal !== this.predictedData[this.arrayIndex] && this.arrayIndex !== 0){
+        if (this.predictedData[this.arrayIndex] === 1)
+          this.telegramService.sendMessage(`Detected eye state change in time=${this.arrayIndex*2}s. Now: OPENED`).subscribe();
+        else
+          this.telegramService.sendMessage(`Detected eye state change in time=${this.arrayIndex*2}s. Now: CLOSED`).subscribe();
+      }
+    }
+    this.prevArrayVal = this.predictedData[this.arrayIndex];
   }
 }

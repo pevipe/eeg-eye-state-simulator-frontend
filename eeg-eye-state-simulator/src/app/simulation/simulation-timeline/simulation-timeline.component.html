@@ -12,7 +12,7 @@
         </button>
     </div>
     <div>
-        <div *ngIf="showTimeline">
+        <div *ngIf="showTimeline" style="margin-top: -10px;">
             <mat-grid-list cols="4">
                 <mat-grid-tile [colspan]="3" [rowspan]="1">
                     <div class="line-container">
@@ -49,4 +49,8 @@
         <h3>Predicted state: CLOSED</h3>
     </ng-template>
     <h3>Total accuracy: {{totalAccuracy}}%</h3>
+    <mat-checkbox style="margin-left: -10px; margin-top: 10px;"
+        [(ngModel)]="sendMessage">
+        Send notification on state change
+    </mat-checkbox>
 </div>
