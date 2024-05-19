@@ -1,10 +1,19 @@
 # EegEyeStateSimulator
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.8.
-
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+
+## Telegram notification service with detected eye state change
+The configuration (bot token and chat ID) must be set in src/environments/environment.ts:
+```TypeScript
+export const environment = {
+    telegramBotToken: 'YOUR-TOKEN-HERE',
+    telegramChatId: 'YOUR-CHATID-HERE',
+}
+```
+To substitute it for other services, the logic from `updateArrayValue()` in `simulation-timeline-component.ts`
+can be resused, changing the calls to `TelegramMessagesService` to the one of choice.
 
 ## Code scaffolding
 
