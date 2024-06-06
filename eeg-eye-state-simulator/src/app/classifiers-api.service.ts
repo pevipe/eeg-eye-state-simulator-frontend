@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, map, of } from 'rxjs';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ClassifiersApiService {
-  baseUrl = 'http://localhost:8000/classifiers';
+  private baseUrl = environment.classifiersApiUrl;
 
   constructor(private http: HttpClient) { }
 
