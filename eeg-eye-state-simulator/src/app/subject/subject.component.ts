@@ -29,7 +29,7 @@ export class SubjectComponent implements OnInit {
 
   updateSubjectList(): void {
     this.classifiersService.getUploadedSubjects().subscribe(subject_list => {
-      this.subject_list = subject_list;
+      this.subject_list = subject_list.sort();
     });
   }
 
