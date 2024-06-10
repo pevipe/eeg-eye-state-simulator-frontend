@@ -10,6 +10,8 @@ export class DataService {
   private selectedTrainSizeSource = new BehaviorSubject<number>(70);
   private graphDataSource = new BehaviorSubject<[number, number, number]>([-1, -1, -1]);
   private simulationGraphStructSource = new BehaviorSubject<[number[], number[], string[]]>([[], [], []]);
+  private telegramBotTokenSource = new BehaviorSubject<string>('');
+  private telegramChatIdSource = new BehaviorSubject<string>('');
   // private realGraphDataSource = new BehaviorSubject<number[]>([]);
   // private predictedGraphDataSource = new BehaviorSubject<number[]>([]);
   // private graphLabelsSource = new BehaviorSubject<string[]>([]);
@@ -20,6 +22,8 @@ export class DataService {
   selectedTrainSize$ = this.selectedTrainSizeSource.asObservable();
   graphData$ = this.graphDataSource.asObservable();
   simulationGraphStruct$ = this.simulationGraphStructSource.asObservable();
+  telegramBotToken$ = this.telegramBotTokenSource.asObservable();
+  telegramChatId$ = this.telegramChatIdSource.asObservable();
 
   constructor() { }
 
@@ -37,6 +41,12 @@ export class DataService {
   }
   updateSimulationGraphData(realData: number[], predictedDate: number[], labels: string[]) {
     this.simulationGraphStructSource.next([realData, predictedDate, labels]);
+  }
+  updateTelegramBotToken(token: string) {
+    this.telegramBotTokenSource.next(token);
+  }
+  updateTelegramChatId(chatId: string) {
+    this.telegramChatIdSource.next(chatId);
   }
 
 }

@@ -17,6 +17,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { TrainingComponent } from './training/training.component';
 import { TrainingSetSliderComponent } from './training-set-slider/training-set-slider.component';
@@ -25,6 +26,7 @@ import { GraphComponent } from './graph/graph.component';
 import { SimulationComponent } from './simulation/simulation.component';
 import { SimulationGraphComponent } from './simulation/simulation-graph/simulation-graph.component';
 import { SimulationTimelineComponent } from './simulation/simulation-timeline/simulation-timeline.component';
+import { TelegramConfigurationDialogComponentComponent } from './simulation/simulation-timeline/telegram-configuration-dialog-component/telegram-configuration-dialog-component.component';
 
 
 
@@ -37,7 +39,8 @@ import { SimulationTimelineComponent } from './simulation/simulation-timeline/si
     GraphComponent,
     SimulationComponent,
     SimulationGraphComponent,
-    SimulationTimelineComponent
+    SimulationTimelineComponent,
+    TelegramConfigurationDialogComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +53,7 @@ import { SimulationTimelineComponent } from './simulation/simulation-timeline/si
     MatTooltipModule,
     NgChartsModule,
     MatGridListModule,
+    MatDialogModule,
   ],
   providers: [
     provideClientHydration(),

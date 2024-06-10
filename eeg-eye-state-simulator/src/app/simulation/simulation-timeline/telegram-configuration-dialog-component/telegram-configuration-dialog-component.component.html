@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Telegram Notification Configuration</h2>
+<mat-dialog-content>
+    
+    <mat-form-field style="width: 100%">
+        <mat-label>Telegram Bot Token</mat-label>
+        <input matInput [(ngModel)]="data.botToken">
+    </mat-form-field>
+    <p></p>
+    <mat-form-field style="width: 100%">
+        <mat-label>Telegram Chat Id</mat-label>
+        <input matInput [(ngModel)]="data.chatId">
+    </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div>
+        <button mat-button (click)="onCancel()">Cancel</button>
+        <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+    </div>
+</mat-dialog-actions>

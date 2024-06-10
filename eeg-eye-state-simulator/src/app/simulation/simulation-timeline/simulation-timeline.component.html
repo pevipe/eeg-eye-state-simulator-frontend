@@ -49,8 +49,15 @@
         <h3>Predicted state: CLOSED</h3>
     </ng-template>
     <h3>Total accuracy: {{totalAccuracy}}%</h3>
-    <mat-checkbox style="margin-left: -10px; margin-top: 10px;"
+    <mat-checkbox *ngIf="!showTelegramConfiguration" style="margin-left: -10px; margin-top: 10px;"
         [(ngModel)]="sendMessage">
         Send notification on state change
     </mat-checkbox>
+    <div *ngIf="showTelegramConfiguration">
+        <button
+            mat-flat-button color="primary"
+            (click)="openConfigurationDialog()">
+                Configure Telegram
+        </button>
+    </div>
 </div>

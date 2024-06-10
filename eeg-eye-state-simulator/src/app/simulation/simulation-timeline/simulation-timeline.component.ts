@@ -1,12 +1,16 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { TelegramMessagesService } from '../../telegram-messages.service';
+import { Subscription } from 'rxjs';
+import { DataService } from '../../data.service';
+import { MatDialog } from '@angular/material/dialog';
+import { TelegramConfigurationDialogComponentComponent } from './telegram-configuration-dialog-component/telegram-configuration-dialog-component.component';
 
 @Component({
   selector: 'app-simulation-timeline',
   templateUrl: './simulation-timeline.component.html',
   styleUrl: './simulation-timeline.component.scss'
 })
-export class SimulationTimelineComponent implements OnChanges {
+export class SimulationTimelineComponent implements OnInit, OnChanges, OnDestroy {
   playing: boolean = false;
   currentTime: number = 0;
   arrayIndex = 0;
@@ -17,10 +21,34 @@ export class SimulationTimelineComponent implements OnChanges {
   sendMessage = false;
   prevArrayVal = -1;
 
+  showTelegramConfiguration = false;
+  botToken: string | undefined;
+  chatId: string | undefined;
+  botTokenSubscription: Subscription | undefined;
+  chatIdSubscription: Subscription | undefined;
+
   @Input() realData: any;
   @Input() predictedData: any;
 
-  constructor(private telegramService: TelegramMessagesService) { }
+  constructor(private telegramService: TelegramMessagesService, 
+              private dataService: DataService,
+              public dialog: MatDialog ) { }
+
+  ngOnInit(): void {
+    this.botTokenSubscription = this.dataService.telegramBotToken$.subscribe(token => {
+      this.botToken = token;
+      this.updateShowTelegramConfiguration();
+    });
+    this.chatIdSubscription = this.dataService.telegramChatId$.subscribe(chatId => {
+      this.chatId = chatId;
+      this.updateShowTelegramConfiguration();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.botTokenSubscription?.unsubscribe();
+    this.chatIdSubscription?.unsubscribe();
+  }
 
   ngOnChanges(): void {
     if (this.realData && this.predictedData) {
@@ -89,5 +117,26 @@ export class SimulationTimelineComponent implements OnChanges {
       }
     }
     this.prevArrayVal = this.predictedData[this.arrayIndex];
+  }
+
+  updateShowTelegramConfiguration(): void {
+    if (this.botToken && this.chatId){
+      if (this.botToken.length > 0 && this.chatId.length > 0)
+        this.showTelegramConfiguration = false;
+    }
+    else
+      this.showTelegramConfiguration = true;
+  }
+
+  openConfigurationDialog(): void {
+    const dialogRef = this.dialog.open(TelegramConfigurationDialogComponentComponent, {
+      data: {botToken: this.botToken, animal: this.chatId},
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.dataService.updateTelegramBotToken(result.botToken);
+      this.dataService.updateTelegramChatId(result.chatId);
+      this.telegramService.startSubscriptions();
+    });
   }
 }
