@@ -1,7 +1,7 @@
 # Build phase -> Node.js
 FROM node:18.20.3-alpine3.20 AS build
 WORKDIR /app
-COPY package*.json ./
+COPY ./eeg-eye-state-simulator/package*.json ./
 RUN npm install
 COPY eeg-eye-state-simulator/ .
 COPY ./docker/environment.ts /app/src/environments/environment.ts
