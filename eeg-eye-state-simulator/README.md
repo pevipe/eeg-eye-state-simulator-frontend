@@ -1,36 +1,69 @@
-# EegEyeStateSimulator
+# EegEyeStateSimulator - frontend
+## Description
+This is the project corresponding to the frontend of the simulator of a control system based on EEG
+signals associated to open and closed eye states. Its backend can be found on [this 
+repository](https://github.com/pevipe/eeg-eye-state-simulator-backend).
 
-## Development server
+Both are part of the End-of-Degree Project of the Degree in Computer Engineering by Pelayo Vieites
+Pérez, from the University of A Coruña. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Telegram notification service with detected eye state change
-The configuration (bot token and chat ID) must be set in src/environments/environment.ts:
+## Requirements
+- Node 18.
+- (Optional) Docker.
+
+## Run the project
+The first time, `npm install` must be executed in the application directory (`eeg-eye-state-simulator`)
+to install the necessary dependencies.
+
+### Configure the URL of the backend's API
+If the API is started in an URL different from `http://localhost:8000/classifiers`, it must be changed in
+the environment of the application, found at `src/environments/environment.ts`:
 ```TypeScript
 export const environment = {
+    classifiersApiUrl: 'http://localhost:8000/classifiers', // MODIFY THIS
+    //...
+}
+```
+
+### Configure Telegram notification service with detected eye state change
+This simulator is able to send a notification in each change of the eye state when running a simulation
+in the timeline component. This service can be configured directly in the frontend of the application,
+after training an algorithm, selecting that option in the simulation component. The parameters to be
+provided are the Telegram bot token and chat ID ([Telegram documentation here](https://core.telegram.org/bots/)).
+
+
+
+However, for a persistent configuration, bot token and chat ID must be set in the environment of the
+application (in `src/environments/environment.ts`):
+```TypeScript
+export const environment = {
+    //...
     telegramBotToken: 'YOUR-TOKEN-HERE',
     telegramChatId: 'YOUR-CHATID-HERE',
 }
 ```
-To substitute it for other services, the logic from `updateArrayValue()` in `simulation-timeline-component.ts`
-can be resused, changing the calls to `TelegramMessagesService` to the one of choice.
 
-## Code scaffolding
+### Start development server
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+From the application directory (`eeg-eye-state-simulator`), running `ng serve` will start the application
+in `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Build a Docker image
+To make it easier to start the server in different environments, a Dockerfile is provided, and it can be used
+to easily generate a Docker image.
 
-## Running unit tests
+In this case, the configuration of the environment of the application (backend's API URL and, optionally,
+Telegram parameters) can be established in the file `docker/environment.ts`, as this will be the one used
+by the container.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+After so, to build the Docker image simply run `docker build -t <image_name:latest> .` from the root 
+directory of the project.
 
-## Running end-to-end tests
+### Run the Docker image
+Once the image has been built, it can be run with `docker run -p 80:80 <image_name:latest>`, and the application
+will be available at `http://localhost:80`.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Note that, for it to work properly, the image with the backend of the application (available 
+[here](https://github.com/pevipe/eeg-eye-state-simulator-backend)) must also be built and running.
