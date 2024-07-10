@@ -6,10 +6,11 @@ repository](https://github.com/pevipe/eeg-eye-state-simulator-backend).
 
 Both are part of the End-of-Degree Project of the Degree in Computer Engineering by Pelayo Vieites
 Pérez, from the University of A Coruña. 
-
+![ui-main](https://github.com/pevipe/TFG_frontend/assets/80844047/fb6632c2-14b3-43e2-a5a0-ea787b9fee90)
 
 ## Requirements
 - Node 18.
+
 - (Optional) Docker.
 
 ## Run the project
@@ -32,6 +33,7 @@ in the timeline component. This service can be configured directly in the fronte
 after training an algorithm, selecting that option in the simulation component. The parameters to be
 provided are the Telegram bot token and chat ID ([Telegram documentation here](https://core.telegram.org/bots/)).
 
+![ui-telegram-config](https://github.com/pevipe/TFG_frontend/assets/80844047/f77ae9db-f67f-4353-b932-cb214a58c047)
 
 
 However, for a persistent configuration, bot token and chat ID must be set in the environment of the
