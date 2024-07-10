@@ -1,6 +1,6 @@
 # EegEyeStateSimulator - frontend
 ## Description
-This is the project corresponding to the frontend of the simulator of a control system based on EEG
+This repository corresponds to the frontend of the simulator of a control system based on EEG
 signals associated to open and closed eye states. Its backend can be found on [this 
 repository](https://github.com/pevipe/eeg-eye-state-simulator-backend).
 
