@@ -1,8 +1,5 @@
 import { Component, Inject, Input, OnChanges, PLATFORM_ID, SimpleChanges } from '@angular/core';
-import { DataService } from '../../data.service';
-import { ClassifiersApiService } from '../../classifiers-api.service';
 import { isPlatformBrowser } from '@angular/common';
-import { Subscription } from 'rxjs';
 import { ChartConfiguration } from 'chart.js';
 
 @Component({
@@ -16,7 +13,6 @@ export class SimulationGraphComponent implements OnChanges{
 
   //Graph variables
   public lineChartLegend = false;
-  // public barChartPlugins = [];
 
   // Graph data
   @Input() realChartDataset: any;
@@ -42,7 +38,6 @@ export class SimulationGraphComponent implements OnChanges{
   public realChartData: ChartConfiguration<'line'>['data'] = {
     labels: [],
     datasets: [{
-      // { data: this.graphData }, //TODO: poner en función de los datos
       data: [],
       stepped: true
     }]
@@ -51,16 +46,13 @@ export class SimulationGraphComponent implements OnChanges{
   public predictedChartData: ChartConfiguration<'line'>['data'] = {
     labels: [],
     datasets: [{
-      // { data: this.graphData }, //TODO: poner en función de los datos
       data: [],
       stepped: true
     }]
   };
   
   
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,
-              private dataService: DataService,
-              private classifiersApiService: ClassifiersApiService) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
@@ -72,6 +64,7 @@ export class SimulationGraphComponent implements OnChanges{
       }
     }
   }
+  
 
   updateCharts(){
     this.realChartData = {

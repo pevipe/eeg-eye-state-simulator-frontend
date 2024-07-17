@@ -15,6 +15,7 @@ export class TelegramMessagesService implements OnDestroy{
   chatIdSubscription: Subscription | undefined;
 
   constructor(private http: HttpClient, private dataService: DataService) { }
+
   startSubscriptions(): void {
     this.botTokenSubscription = this.dataService.telegramBotToken$.subscribe(token => {
       this.botToken = token;

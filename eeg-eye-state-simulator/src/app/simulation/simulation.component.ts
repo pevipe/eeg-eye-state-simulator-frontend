@@ -37,7 +37,7 @@ export class SimulationComponent implements OnInit{
     this.simulationGraphSubscription?.unsubscribe();
   }
 
-  onNumberOfWindowsChange(newValue: number): void {
+  onNumberOfWindowsChange(): void {
     this.updatePredictedDataWithWindow(this.predictedDataFromAPi ?? []);
   }
 

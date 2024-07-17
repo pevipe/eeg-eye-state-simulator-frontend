@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ClassifiersApiService } from '../classifiers-api.service';
 import { DataService } from '../data.service';
 
 @Component({
@@ -15,8 +14,7 @@ export class TrainingSetSliderComponent {
   showTicks=true;
   value:number=70;
 
-  constructor(private classifiersService: ClassifiersApiService, 
-    private dataService: DataService) { }
+  constructor(private dataService: DataService) { }
 
   onSliderChange(event:any) : void{
     this.dataService.updateTrainSize(event.target.value);

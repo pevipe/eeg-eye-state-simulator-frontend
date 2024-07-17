@@ -3,7 +3,7 @@ import { TelegramMessagesService } from '../../telegram-messages.service';
 import { Subscription } from 'rxjs';
 import { DataService } from '../../data.service';
 import { MatDialog } from '@angular/material/dialog';
-import { TelegramConfigurationDialogComponentComponent } from './telegram-configuration-dialog-component/telegram-configuration-dialog-component.component';
+import { TelegramConfigurationDialogComponent } from './telegram-configuration-dialog/telegram-configuration-dialog.component';
 
 @Component({
   selector: 'app-simulation-timeline',
@@ -11,16 +11,20 @@ import { TelegramConfigurationDialogComponentComponent } from './telegram-config
   styleUrl: './simulation-timeline.component.scss'
 })
 export class SimulationTimelineComponent implements OnInit, OnChanges, OnDestroy {
+  // Control variables
   playing: boolean = false;
   currentTime: number = 0;
   arrayIndex = 0;
   id = 0;
   ballPosition = 0;
   showTimeline = false;
+
+  // Timeline variables
   totalAccuracy = 0;
-  sendMessage = false;
   prevArrayVal = -1;
 
+  // Telegram Service variables
+  sendMessage = false;
   showTelegramConfiguration = false;
   botToken: string | undefined;
   chatId: string | undefined;
@@ -58,6 +62,8 @@ export class SimulationTimelineComponent implements OnInit, OnChanges, OnDestroy
       }
     }
   }
+
+  // Method to update the accuracy when changing the number of considered time windows
   updateAccuracy() {
     var total = 0;
     for (var i = 0; i < this.realData.length; i++) {
@@ -68,25 +74,26 @@ export class SimulationTimelineComponent implements OnInit, OnChanges, OnDestroy
     this.totalAccuracy = Math.round(total / this.realData.length * 10000)/100;
   }
 
+  //Methods to control reproduction in the timeline
   play(): void {
-    // Iniciar la reproducción
+    // Start the timeline
     if (!this.playing){
       this.playing = true;
       this.id = window.setInterval(() => {
-        this.currentTime = Math.round((this.currentTime + 0.1) * 10) / 10; // Redondear el tiempo a un decimal
-        this.updateArrayValue(); // Actualizar el valor del array cada 2 segundos
+        this.currentTime = Math.round((this.currentTime + 0.1) * 10) / 10; // Round time to one decimal
+        this.updateArrayValue(); // Update array value each 2 seconds (when a new value is available)
       }, 100);
     }
   }
   pause(): void {
-    // Pausar la reproducción
+    // Pause the timeline
     if (this.playing){
       this.playing = false;
       clearInterval(this.id);
     }
   }
   stop(): void{
-    // Detener la reproducción
+    // Stop the timeline
     if (this.playing){
       this.playing = false;
       clearInterval(this.id);
@@ -96,7 +103,7 @@ export class SimulationTimelineComponent implements OnInit, OnChanges, OnDestroy
   }
 
   updateArrayValue(): void {
-    // Lógica para obtener el valor del array en el tiempo actual
+    // Method to obtain the value of the array at the current time, and send a message if the value changes
     var index = this.currentTime / 2;
     if (index >= this.realData.length){
       this.playing = false;
@@ -105,6 +112,7 @@ export class SimulationTimelineComponent implements OnInit, OnChanges, OnDestroy
       this.arrayIndex = this.realData.length - 1;
       return;
     }
+
     this.arrayIndex = Math.floor(index);
     this.ballPosition = index/this.realData.length * 100;
 
@@ -116,9 +124,11 @@ export class SimulationTimelineComponent implements OnInit, OnChanges, OnDestroy
           this.telegramService.sendMessage(`Detected eye state change in time=${this.arrayIndex*2}s. Now: CLOSED`).subscribe();
       }
     }
+
     this.prevArrayVal = this.predictedData[this.arrayIndex];
   }
 
+  // Methods to control the Telegram configuration
   updateShowTelegramConfiguration(): void {
     if (this.botToken && this.chatId){
       if (this.botToken.length > 0 && this.chatId.length > 0)
@@ -129,7 +139,7 @@ export class SimulationTimelineComponent implements OnInit, OnChanges, OnDestroy
   }
 
   openConfigurationDialog(): void {
-    const dialogRef = this.dialog.open(TelegramConfigurationDialogComponentComponent, {
+    const dialogRef = this.dialog.open(TelegramConfigurationDialogComponent, {
       data: {botToken: this.botToken, animal: this.chatId},
     });
 

@@ -34,7 +34,7 @@ export class GraphComponent implements OnInit{
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
     responsive: true,
     scales: {
-      y: { beginAtZero: false, max: 1, min: .50,  },  //TODO: poner en función de los datos
+      y: { beginAtZero: false, max: 1, min: .50,  },
     },
   };
 
@@ -68,6 +68,10 @@ export class GraphComponent implements OnInit{
           borderColor: [ 'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)', 'rgba(255, 206, 86, 1)' ],
          },
       ]
+    }
+    var minimum = Math.min(...this.graphData);
+    if ((minimum < 0.5) && (this.barChartOptions?.scales?.['y'] != undefined)) {
+      this.barChartOptions.scales['y'].min = Math.max(0, minimum - 0.1);
     }
   }
 

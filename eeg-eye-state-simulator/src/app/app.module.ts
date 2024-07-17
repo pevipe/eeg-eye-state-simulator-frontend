@@ -30,8 +30,7 @@ import { GraphComponent } from './graph/graph.component';
 import { SimulationComponent } from './simulation/simulation.component';
 import { SimulationGraphComponent } from './simulation/simulation-graph/simulation-graph.component';
 import { SimulationTimelineComponent } from './simulation/simulation-timeline/simulation-timeline.component';
-import { TelegramConfigurationDialogComponentComponent } from './simulation/simulation-timeline/telegram-configuration-dialog-component/telegram-configuration-dialog-component.component';
-//TODO: Change ComponentComponent
+import { TelegramConfigurationDialogComponent } from './simulation/simulation-timeline/telegram-configuration-dialog/telegram-configuration-dialog.component';
 
 // External libraries
 import { NgChartsModule } from 'ng2-charts';
@@ -47,7 +46,7 @@ import { NgChartsModule } from 'ng2-charts';
     SimulationComponent,
     SimulationGraphComponent,
     SimulationTimelineComponent,
-    TelegramConfigurationDialogComponentComponent
+    TelegramConfigurationDialogComponent
   ],
   imports: [
     // Angular Modules
