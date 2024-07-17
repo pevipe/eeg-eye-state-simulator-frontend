@@ -15,22 +15,19 @@ export class ClassifiersApiService {
     return this.http.get<any>(this.baseUrl + '/uploaded_subjects').pipe(
       map(response => response.data)
     );
-    // return of(["subject_1", "subject_2", "subject_3", "subject_4", "subject_5"]);  // mock subject list
   }
 
   uploadSubject(file: File) {
     const formData = new FormData();
     formData.append('file', file);
-    return this.http.post(this.baseUrl + '/upload_subject', formData);
-        
-    // return of(null);  // mock upload
+    
+    return this.http.post(this.baseUrl + '/upload_subject', formData);        
   }
 
   windowSubject(subjectName: string, window_size: number): Observable<any> {
     const data = {"subject": subjectName, "window": window_size};
+    
     return this.http.post<any>(this.baseUrl + '/window_subject', null, {params: data});
-
-    // return of(null);  // mock window
   }
 
   private toApiFormat(algorithm: string): string {
@@ -57,12 +54,8 @@ export class ClassifiersApiService {
     }
 
     const params = {subject: subjectName, algorithm: this.toApiFormat(algorithm), window: window_size};
+    
     return this.http.get<boolean>(this.baseUrl + "/is_optimized", {params: params});
-
-    // if (subjectName == "Sujeto_1" && algorithm == "AdaBoost" && window_size == 10)  //mock
-    //   return of(true);
-    // else
-    //   return of(false);
   }
 
   optimize(subjectName: string, algorithm: string, window_size: number): Observable<any> {
@@ -70,15 +63,13 @@ export class ClassifiersApiService {
     var alg: string = algorithm;
 
     const params = {subject: subjectName, algorithm: this.toApiFormat(algorithm), window: window_size};
-    return this.http.post<any>(this.baseUrl + "/optimize", null, {params: params});
     
-    // return of(null);  // mock optimize
+    return this.http.post<any>(this.baseUrl + "/optimize", null, {params: params});
   }
 
   train(subjectName: string, algorithm: string, window_size: number, train_size: number, useCustomHyperparams: boolean): Observable<any> {
     const params = {subject: subjectName, algorithm: this.toApiFormat(algorithm), window: window_size, train_set_size: train_size, use_optimized_hyperparams: useCustomHyperparams};
-    return this.http.post<any>(this.baseUrl + "/train", null, {params: params});
     
-    // return of(null);  // mock train
+    return this.http.post<any>(this.baseUrl + "/train", null, {params: params});
   }
 }
