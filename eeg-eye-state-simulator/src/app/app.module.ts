@@ -1,33 +1,40 @@
+// Angular Modules
 import { NgModule } from '@angular/core';
-import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { SubjectComponent } from './subject/subject.component';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+// Angular utilities
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatFormFieldModule} from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
+import { provideClientHydration } from '@angular/platform-browser';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+
+// Material Modules
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatSliderModule } from '@angular/material/slider';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule} from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
+// Project components
+import { AppComponent } from './app.component';
+import { SubjectComponent } from './subject/subject.component';
 import { TrainingComponent } from './training/training.component';
 import { TrainingSetSliderComponent } from './training-set-slider/training-set-slider.component';
-import { NgChartsModule } from 'ng2-charts';
 import { GraphComponent } from './graph/graph.component';
 import { SimulationComponent } from './simulation/simulation.component';
 import { SimulationGraphComponent } from './simulation/simulation-graph/simulation-graph.component';
 import { SimulationTimelineComponent } from './simulation/simulation-timeline/simulation-timeline.component';
 import { TelegramConfigurationDialogComponentComponent } from './simulation/simulation-timeline/telegram-configuration-dialog-component/telegram-configuration-dialog-component.component';
+//TODO: Change ComponentComponent
 
+// External libraries
+import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -43,22 +50,27 @@ import { TelegramConfigurationDialogComponentComponent } from './simulation/simu
     TelegramConfigurationDialogComponentComponent
   ],
   imports: [
+    // Angular Modules
     BrowserModule,
-    AppRoutingModule,
-    MatFormFieldModule, MatInputModule, MatSelectModule,
-    MatIconModule, MatButtonModule,
-    MatCheckboxModule, 
-    MatSliderModule, FormsModule,
-    MatProgressSpinnerModule,
-    MatTooltipModule,
+    FormsModule,
+    // Material Modules
+    MatButtonModule,
     NgChartsModule,
-    MatGridListModule,
+    MatCheckboxModule, 
     MatDialogModule,
+    MatFormFieldModule,
+    MatGridListModule,
+    MatIconModule, 
+    MatInputModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatTooltipModule,
   ],
   providers: [
+    provideAnimationsAsync(),
     provideClientHydration(),
     provideHttpClient(withFetch()),
-    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent]
 })
