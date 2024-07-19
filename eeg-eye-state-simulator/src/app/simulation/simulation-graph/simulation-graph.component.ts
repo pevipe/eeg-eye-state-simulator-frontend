@@ -23,7 +23,7 @@ export class SimulationGraphComponent implements OnChanges{
   public lineChartOptions: ChartConfiguration<'line'>['options'] = {
     responsive: true,
     scales: {
-      y: { max: 1.2,  },  
+      y: { max: 1.2,  min: 0},  
     },
     maintainAspectRatio: false,
     elements: {
