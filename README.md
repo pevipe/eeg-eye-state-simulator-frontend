@@ -63,6 +63,9 @@ by the container.
 After so, to build the Docker image simply run `docker build -t <image_name:latest> .` from the root 
 directory of the project.
 
+> **NOTE**: Make sure not to have the folder `node_modules` generated in the directory `eeg-eye-simulator`
+before executing the command. Otherwise, it will be fully copied and the build will be unefficient.
+
 ### Run the Docker image
 Once the image has been built, it can be run with `docker run -p 80:80 <image_name:latest>`, and the application
 will be available at `http://localhost:80`.
