@@ -37,13 +37,13 @@
 
 <div *ngIf="showTimeline">
     <div *ngIf="realData[arrayIndex]==1; else realClosed">
-        <h3>Real state: OPENED</h3>
+        <h3>Real state: OPEN</h3>
     </div>
     <ng-template #realClosed>
         <h3>Real state: CLOSED</h3>
     </ng-template>
     <div *ngIf="predictedData[arrayIndex]==1; else predictedClosed">
-        <h3>Predicted state: OPENED</h3>
+        <h3>Predicted state: OPEN</h3>
     </div>
     <ng-template #predictedClosed>
         <h3>Predicted state: CLOSED</h3>

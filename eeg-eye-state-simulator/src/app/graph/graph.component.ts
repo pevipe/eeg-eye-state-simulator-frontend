@@ -25,7 +25,7 @@ export class GraphComponent implements OnInit{
 
   // Chart initialization
   public barChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: [ 'Opened', 'Closed', 'Total' ],
+    labels: [ 'Open', 'Closed', 'Total' ],
     datasets: [
       { data: this.graphData },
     ]
@@ -61,7 +61,7 @@ export class GraphComponent implements OnInit{
 
   updateChart() {
     this.barChartData = {
-      labels: [ 'Opened', 'Closed', 'Total' ],
+      labels: [ 'Open', 'Closed', 'Total' ],
       datasets: [
         { data: this.graphData,
           backgroundColor: [ 'rgba(255, 99, 132, 0.4)', 'rgba(54, 162, 235, 0.4)', 'rgba(255, 206, 86, 0.4)' ],

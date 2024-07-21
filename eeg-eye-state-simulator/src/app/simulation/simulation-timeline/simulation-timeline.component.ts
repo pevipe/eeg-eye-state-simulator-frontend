@@ -119,7 +119,7 @@ export class SimulationTimelineComponent implements OnInit, OnChanges, OnDestroy
     if (this.sendMessage){
       if (this.prevArrayVal !== this.predictedData[this.arrayIndex] && this.arrayIndex !== 0){
         if (this.predictedData[this.arrayIndex] === 1)
-          this.telegramService.sendMessage(`Detected eye state change in time=${this.arrayIndex*2}s. Now: OPENED`).subscribe();
+          this.telegramService.sendMessage(`Detected eye state change in time=${this.arrayIndex*2}s. Now: OPEN`).subscribe();
         else
           this.telegramService.sendMessage(`Detected eye state change in time=${this.arrayIndex*2}s. Now: CLOSED`).subscribe();
       }
