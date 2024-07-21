@@ -6,7 +6,9 @@ repository](https://github.com/pevipe/eeg-eye-state-simulator-backend).
 
 Both are part of the End-of-Degree Project of the Degree in Computer Engineering by Pelayo Vieites
 Pérez, from the University of A Coruña. 
-![ui-main](https://github.com/pevipe/TFG_frontend/assets/80844047/fb6632c2-14b3-43e2-a5a0-ea787b9fee90)
+
+![ui-main](https://github.com/user-attachments/assets/516ff235-e933-4e0b-a78d-e1ac6a3c2d7c)
+
 
 ## Requirements
 - Node 18.
