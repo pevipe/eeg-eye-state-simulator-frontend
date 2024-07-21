@@ -44,7 +44,7 @@ in the timeline component. This service can be configured directly in the fronte
 after training an algorithm, selecting that option in the simulation component. The parameters to be
 provided are the Telegram bot token and chat ID ([Telegram documentation here](https://core.telegram.org/bots/)).
 
-![ui-telegram-config](https://github.com/pevipe/TFG_frontend/assets/80844047/f77ae9db-f67f-4353-b932-cb214a58c047)
+![ui-telegram-config](https://github.com/user-attachments/assets/b915c0f9-ad3d-4ab0-9c67-2ac1c772bbd6)
 
 
 However, for a persistent configuration, bot token and chat ID must be set in the environment of the
