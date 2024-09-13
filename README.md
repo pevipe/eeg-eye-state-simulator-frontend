@@ -6,7 +6,8 @@ signals associated to open and closed eye states. Its backend can be found on [t
 repository](https://github.com/pevipe/eeg-eye-state-simulator-backend).
 
 Both are part of the End-of-Degree Project of the Degree in Computer Engineering by Pelayo Vieites
-Pérez, from the University of A Coruña. 
+Pérez, from the University of A Coruña. They are licensed under the Mozzila Public License 2.0,
+including a copy of it in the LICENSE file.
 
 ![ui-main](https://github.com/user-attachments/assets/516ff235-e933-4e0b-a78d-e1ac6a3c2d7c)
 
